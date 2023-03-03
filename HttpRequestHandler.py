@@ -3,7 +3,7 @@ import config
 
 class HttpRequestHandler:
     def __init__(self):
-        self.textUrl = 'https://api.openai.com/v1/completions'
+        self.textUrl = 'https://api.openai.com/v1/chat/completions'
         self.imageUrl = 'https://api.openai.com/v1/images/generations'
         self.headers = {'Authorization' : f'Bearer {config.API_KEY}'}
     
@@ -20,5 +20,4 @@ class HttpRequestHandler:
             'prompt': prompt,
         }
         response = requests.post(self.imageUrl, headers = self.headers, json = data)
-        imageUrl = response.json()['data'][0]['url']
-        return imageUrl
+        return response.json()['data'][0]['url']
